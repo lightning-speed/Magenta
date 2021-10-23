@@ -12,6 +12,7 @@ public class Excutioner {
     public static String vars[] = new String[300];
     public static int index = 0;
     public static void run_instruction(String ins){
+        if(current_dir==null)current_dir = System.getProperty("user.dir");
         if(StringUtil.equalS(ins,"set",3)){
            vars[index] = ins.split(" ")[1];
            vars[index+1] = ins.substring(5+vars[index].length(),ins.length());
@@ -20,9 +21,16 @@ public class Excutioner {
         for(int i = 0;i<index;i+=2){
             ins = ins.replace("("+vars[i]+")",vars[i+1]);
         }
+        if(StringUtil.equalS(ins,"del",3)){
+            new File(current_dir+"/"+ins.substring(4,ins.length())).delete();
+        }
+
      if(StringUtil.equalS(ins,"echo",4)){
          System.out.println(ins.substring(5,ins.length()));
      }
+        if(StringUtil.equalS(ins,"mkdir",5)){
+            new File(current_dir+"/"+ins.substring(6,ins.length())).mkdir();
+        }
         if(StringUtil.equalS(ins,"cd",2)){
             current_dir =  new File(ins.substring(3,ins.length())).getAbsolutePath();
             System.out.println(current_dir);
