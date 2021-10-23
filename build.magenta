@@ -1,0 +1,6 @@
+main:
+ exec java.exe
+ jump second
+ end
+second:
+ end
