@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Excutioner {
     public static String current_dir;
@@ -23,6 +24,14 @@ public class Excutioner {
         }
         if(StringUtil.equalS(ins,"del",3)){
             new File(current_dir+"/"+ins.substring(4,ins.length())).delete();
+        }
+        if(StringUtil.equalS(ins,"pause",5)){
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
      if(StringUtil.equalS(ins,"echo",4)){
